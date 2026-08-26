@@ -68,3 +68,4 @@ for mes in 1...mesesPlan {
     print(" \(strMes)  |  S/ \(strInicial) |   S/ \(strMensual) |    S/ \(strResta)")
 }
 print("-------------------------------------------------------------")
+

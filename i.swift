@@ -49,8 +49,9 @@ print("Monto Final: S/ \(montoFinal)")
 print("Cuotas: \(mesesPlan) meses")
 print("Cuota Mensual: S/ \(String(format: "%.2f", cuotaMensual))")
 
-
+print("\n-------------------------------------------------------------")
 print("MES  | MONTO INICIAL  | MONTO MENSUAL  | RESTA POR PAGAR")
+print("-------------------------------------------------------------")
 
 var saldoPendiente: Double = montoFinal
 
@@ -68,3 +69,4 @@ for mes in 1...mesesPlan {
     print(" \(strMes)  |  S/ \(strInicial) |   S/ \(strMensual) |    S/ \(strResta)")
 }
 print("-------------------------------------------------------------")
+

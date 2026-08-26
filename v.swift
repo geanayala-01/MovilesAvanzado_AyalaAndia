@@ -49,22 +49,25 @@ print("Monto Final: S/ \(montoFinal)")
 print("Cuotas: \(mesesPlan) meses")
 print("Cuota Mensual: S/ \(String(format: "%.2f", cuotaMensual))")
 
+// Tabla del cronograma de pagos
+print("\n CRONOGRAMA DE PAGOS ")
+print("Mes\tMonto Inicial\tCuota\t\tSaldo Restante")
 
-print("MES  | MONTO INICIAL  | MONTO MENSUAL  | RESTA POR PAGAR")
+var saldo: Double = montoFinal
 
-var saldoPendiente: Double = montoFinal
-
-for mes in 1...mesesPlan {
-    let montoInicialMes: Double = saldoPendiente
-    saldoPendiente -= cuotaMensual
+for i in 1...mesesPlan {
+    let inicial = saldo
+    saldo = saldo - cuotaMensual
     
-    if saldoPendiente < 0.01 { saldoPendiente = 0.0 }
+    if saldo < 0 {
+        saldo = 0
+    }
     
-    let strMes = String(format: "%2d", mes)
-    let strInicial = String(format: "%12.2f", montoInicialMes)
-    let strMensual = String(format: "%13.2f", cuotaMensual)
-    let strResta = String(format: "%15.2f", saldoPendiente)
+    // Redondeo simple de 2 decimales estilo alumno
+    let inicialRedondeado = Double(round(100 * inicial) / 100)
+    let cuotaRedondeada = Double(round(100 * cuotaMensual) / 100)
+    let saldoRedondeado = Double(round(100 * saldo) / 100)
     
-    print(" \(strMes)  |  S/ \(strInicial) |   S/ \(strMensual) |    S/ \(strResta)")
+    print("\(i)\tS/ \(inicialRedondeado)\t\tS/ \(cuotaRedondeada)\tS/ \(saldoRedondeado)")
 }
-print("-------------------------------------------------------------")
+
