@@ -40,3 +40,4 @@ default:
 let montoInteres: Double = montoCompra * porcentajeInteres
 let montoFinal: Double = montoCompra + montoInteres
 let cuotaMensual: Double = montoFinal / Double(mesesPlan)
+
