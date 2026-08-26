@@ -48,3 +48,4 @@ print("Interés (\(Int(porcentajeInteres * 100))%): S/ \(montoInteres)")
 print("Monto Final: S/ \(montoFinal)")
 print("Cuotas: \(mesesPlan) meses")
 print("Cuota Mensual: S/ \(String(format: "%.2f", cuotaMensual))")
+
