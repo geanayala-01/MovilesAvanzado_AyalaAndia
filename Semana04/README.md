@@ -32,3 +32,6 @@ Sistema en Swift que simula la red del Metro de Lima y Callao (Líneas 1-6) usan
 | Universitaria | Línea 2 ↔ Línea 6 |
 
 ## Ejecutar
+
+## Autor
+Gean Ayala
