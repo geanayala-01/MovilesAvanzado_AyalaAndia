@@ -1,5 +1,7 @@
 // Metro de Lima y Callao - Consulta en consola
 
+// Se usaron diccionarios para las estaciones de la linea del tren
+
 // Datos de las lineas
 let lineas: [String: [String]] = [
 
@@ -126,6 +128,8 @@ let lineas: [String: [String]] = [
 ]
 
 // FUNCIONES
+
+// utilizamos funciones que llamamos en el menu principal
 
 func mostrarLineas() {
     print("\nLineas disponibles:")
