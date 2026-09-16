@@ -69,13 +69,53 @@ class ClienteJuridico: Cliente {
     }
 }
 
-// --- Simulación (recorrido polimórfico con UN solo for-in) ---
-let clienteNatural = ClienteNatural(codigo: "C001", direccion: "Av. Lima 123", fechaDeRegistro: "2025-04-03", numeroCuenta: "001-2025-000123", montoMinimoApertura: 500.0, nombreCompleto: "Juan Pérez", dni: "12345678")
+// --- Registro interactivo por terminal (ejecutar con: swift Contents.swift) ---
+var clientes: [Cliente] = []
+var continuar = true
 
-let clienteJuridico = ClienteJuridico(codigo: "C002", direccion: "Jr. Empresas 456", fechaDeRegistro: "2025-04-01", numeroCuenta: "001-2025-000456", montoMinimoApertura: 3000.0, razonSocial: "Soluciones SAC", ruc: "20123456789", representanteLegal: "María León")
+while continuar {
+    print("\n===== REGISTRO DE CLIENTE =====")
+    print("1. Cliente Natural")
+    print("2. Cliente Jurídico")
+    print("Elige el tipo de cliente: ")
+    let opcion = readLine() ?? ""
 
-let clientes: [Cliente] = [clienteNatural, clienteJuridico]
+    print("Código: ")
+    let codigo = readLine() ?? ""
+    print("Dirección: ")
+    let direccion = readLine() ?? ""
+    print("Fecha de registro (aaaa-mm-dd): ")
+    let fecha = readLine() ?? ""
+    print("N° de cuenta: ")
+    let cuenta = readLine() ?? ""
+    print("Monto mínimo de apertura: ")
+    let monto = Double(readLine() ?? "0") ?? 0.0
 
+    if opcion == "1" {
+        print("Nombre completo: ")
+        let nombre = readLine() ?? ""
+        print("DNI: ")
+        let dni = readLine() ?? ""
+        let nuevoCliente = ClienteNatural(codigo: codigo, direccion: direccion, fechaDeRegistro: fecha, numeroCuenta: cuenta, montoMinimoApertura: monto, nombreCompleto: nombre, dni: dni)
+        clientes.append(nuevoCliente)
+    } else {
+        print("Razón Social: ")
+        let razonSocial = readLine() ?? ""
+        print("RUC: ")
+        let ruc = readLine() ?? ""
+        print("Representante Legal: ")
+        let representante = readLine() ?? ""
+        let nuevoCliente = ClienteJuridico(codigo: codigo, direccion: direccion, fechaDeRegistro: fecha, numeroCuenta: cuenta, montoMinimoApertura: monto, razonSocial: razonSocial, ruc: ruc, representanteLegal: representante)
+        clientes.append(nuevoCliente)
+    }
+
+    print("¿Deseas registrar otro cliente? (s/n): ")
+    let respuesta = readLine() ?? "n"
+    continuar = (respuesta == "s")
+}
+
+// --- Mostrar todos los clientes registrados (recorrido polimórfico con UN solo for-in) ---
+print("\n===== CLIENTES REGISTRADOS =====")
 for cliente in clientes {
     cliente.mostrarDatos()
     print("--------------------")

@@ -17,7 +17,7 @@ Un alumno puede matricularse en uno o más cursos libres. Si lleva 3 o más curs
 | RF05 | Aplicar descuento adicional de S/ 400 a alumnos Tecsup con 3 o más cursos | `calcularTotalFinal()` |
 | RF06 | Mostrar el resumen de cada alumno con su total final | `mostrarResumen()` |
 
-**Archivo:** `ActividadPropuesta01.swift`
+**Archivo:** `ActividadPropuesta01.playground`
 
 ## Actividad Propuesta 02 — Cliente bancario (herencia y polimorfismo)
 
@@ -33,15 +33,15 @@ Un banco registra dos tipos de cliente: natural y jurídico. Ambos comparten los
 | RF04 | Mostrar los datos propios del cliente y luego los datos heredados | `override mostrarDatos()` + `super.mostrarDatos()` |
 | RF05 | Recorrer todos los clientes sin importar su tipo, con un solo bucle | `let clientes: [Cliente]` + `for-in` |
 
-**Archivo:** `ActividadPropuesta02.swift`
+**Archivo:** `ActividadPropuesta02.playground`
 
 ## Ejecutar
 
-Abrir cada archivo en un Playground de Xcode, o correrlo directo por consola:
+Doble clic en cada `.playground` para abrirlo en Xcode: el resultado aparece en vivo en el panel lateral de cada línea. También se puede correr por consola:
 
 ```bash
-swift ActividadPropuesta01.swift
-swift ActividadPropuesta02.swift
+swift ActividadPropuesta01.playground/Contents.swift
+swift ActividadPropuesta02.playground/Contents.swift
 ```
 
 ## Autor
