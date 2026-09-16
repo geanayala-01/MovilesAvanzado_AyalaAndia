@@ -21,7 +21,7 @@ Un alumno puede matricularse en uno o más cursos libres. Si lleva 3 o más curs
 
 ## Actividad Propuesta 02 — Cliente bancario (herencia y polimorfismo)
 
-Un banco registra dos tipos de cliente: natural y jurídico. Ambos comparten los datos de la cuenta (código, dirección, fecha de registro, número de cuenta y monto mínimo de apertura), pero cada uno agrega sus propios datos particulares.
+Un banco registra dos tipos de cliente: natural y jurídico. Ambos comparten los datos de la cuenta (código, dirección, fecha de registro, número de cuenta y monto mínimo de apertura), pero cada uno agrega sus propios datos particulares. El registro se hace de forma interactiva por consola, con un menú.
 
 ### Requerimientos funcionales
 
@@ -31,18 +31,24 @@ Un banco registra dos tipos de cliente: natural y jurídico. Ambos comparten los
 | RF02 | Registrar cliente natural con nombre completo y DNI | `class ClienteNatural: Cliente` |
 | RF03 | Registrar cliente jurídico con razón social, RUC y representante legal | `class ClienteJuridico: Cliente` |
 | RF04 | Mostrar los datos propios del cliente y luego los datos heredados | `override mostrarDatos()` + `super.mostrarDatos()` |
-| RF05 | Recorrer todos los clientes sin importar su tipo, con un solo bucle | `let clientes: [Cliente]` + `for-in` |
+| RF05 | Recorrer todos los clientes sin importar su tipo, con un solo bucle | `var clientes: [Cliente]` + `for-in` |
+| RF06 | Registrar clientes ingresando los datos por teclado (consola) | Menú con `readLine()` para cada campo |
+| RF07 | Listar los clientes ya registrados desde el menú | Opción `3` del menú |
 
 **Archivo:** `ActividadPropuesta02.playground`
 
 ## Ejecutar
 
-Doble clic en cada `.playground` para abrirlo en Xcode: el resultado aparece en vivo en el panel lateral de cada línea. También se puede correr por consola:
-
+**Actividad 01** — no pide datos, se puede abrir en Xcode (doble clic al `.playground`, resultado en vivo en el panel lateral) o correr por consola:
 ```bash
 swift ActividadPropuesta01.playground/Contents.swift
+```
+
+**Actividad 02** — pide datos por teclado, así que **debe ejecutarse por terminal** (el modo Live de Xcode Playground no tiene teclado interactivo):
+```bash
 swift ActividadPropuesta02.playground/Contents.swift
 ```
+Muestra un menú: `1` registra cliente natural, `2` registra cliente jurídico, `3` lista los clientes registrados, `4` sale.
 
 ## Autor
 Gean Ayala
