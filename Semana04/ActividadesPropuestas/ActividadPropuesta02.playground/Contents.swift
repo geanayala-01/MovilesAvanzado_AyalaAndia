@@ -69,36 +69,50 @@ class ClienteJuridico: Cliente {
     }
 }
 
-// --- Registro interactivo por terminal (ejecutar con: swift Contents.swift) ---
+// --- Menú interactivo por terminal (ejecutar con: swift Contents.swift) ---
 var clientes: [Cliente] = []
-var continuar = true
+var salir = false
 
-while continuar {
-    print("\n===== REGISTRO DE CLIENTE =====")
-    print("1. Cliente Natural")
-    print("2. Cliente Jurídico")
-    print("Elige el tipo de cliente: ")
+while !salir {
+    print("\n===== MENÚ CLIENTES =====")
+    print("1. Registrar Cliente Natural")
+    print("2. Registrar Cliente Jurídico")
+    print("3. Listar clientes registrados")
+    print("4. Salir")
+    print("Elige una opción: ")
     let opcion = readLine() ?? ""
 
-    print("Código: ")
-    let codigo = readLine() ?? ""
-    print("Dirección: ")
-    let direccion = readLine() ?? ""
-    print("Fecha de registro (aaaa-mm-dd): ")
-    let fecha = readLine() ?? ""
-    print("N° de cuenta: ")
-    let cuenta = readLine() ?? ""
-    print("Monto mínimo de apertura: ")
-    let monto = Double(readLine() ?? "0") ?? 0.0
-
-    if opcion == "1" {
+    switch opcion {
+    case "1":
+        print("Código: ")
+        let codigo = readLine() ?? ""
+        print("Dirección: ")
+        let direccion = readLine() ?? ""
+        print("Fecha de registro (aaaa-mm-dd): ")
+        let fecha = readLine() ?? ""
+        print("N° de cuenta: ")
+        let cuenta = readLine() ?? ""
+        print("Monto mínimo de apertura: ")
+        let monto = Double(readLine() ?? "0") ?? 0.0
         print("Nombre completo: ")
         let nombre = readLine() ?? ""
         print("DNI: ")
         let dni = readLine() ?? ""
         let nuevoCliente = ClienteNatural(codigo: codigo, direccion: direccion, fechaDeRegistro: fecha, numeroCuenta: cuenta, montoMinimoApertura: monto, nombreCompleto: nombre, dni: dni)
         clientes.append(nuevoCliente)
-    } else {
+        print("✅ Cliente natural registrado.")
+
+    case "2":
+        print("Código: ")
+        let codigo = readLine() ?? ""
+        print("Dirección: ")
+        let direccion = readLine() ?? ""
+        print("Fecha de registro (aaaa-mm-dd): ")
+        let fecha = readLine() ?? ""
+        print("N° de cuenta: ")
+        let cuenta = readLine() ?? ""
+        print("Monto mínimo de apertura: ")
+        let monto = Double(readLine() ?? "0") ?? 0.0
         print("Razón Social: ")
         let razonSocial = readLine() ?? ""
         print("RUC: ")
@@ -107,16 +121,25 @@ while continuar {
         let representante = readLine() ?? ""
         let nuevoCliente = ClienteJuridico(codigo: codigo, direccion: direccion, fechaDeRegistro: fecha, numeroCuenta: cuenta, montoMinimoApertura: monto, razonSocial: razonSocial, ruc: ruc, representanteLegal: representante)
         clientes.append(nuevoCliente)
+        print("✅ Cliente jurídico registrado.")
+
+    case "3":
+        // Recorrido polimórfico: un solo for-in sobre [Cliente]
+        print("\n===== CLIENTES REGISTRADOS =====")
+        if clientes.count == 0 {
+            print("Todavía no hay clientes registrados.")
+        } else {
+            for cliente in clientes {
+                cliente.mostrarDatos()
+                print("--------------------")
+            }
+        }
+
+    case "4":
+        print("Saliendo del programa...")
+        salir = true
+
+    default:
+        print("Opción inválida, intenta de nuevo.")
     }
-
-    print("¿Deseas registrar otro cliente? (s/n): ")
-    let respuesta = readLine() ?? "n"
-    continuar = (respuesta == "s")
-}
-
-// --- Mostrar todos los clientes registrados (recorrido polimórfico con UN solo for-in) ---
-print("\n===== CLIENTES REGISTRADOS =====")
-for cliente in clientes {
-    cliente.mostrarDatos()
-    print("--------------------")
 }
