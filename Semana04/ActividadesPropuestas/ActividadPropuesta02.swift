@@ -68,3 +68,15 @@ class ClienteJuridico: Cliente {
         super.mostrarDatos()
     }
 }
+
+// --- Simulación (recorrido polimórfico con UN solo for-in) ---
+let clienteNatural = ClienteNatural(codigo: "C001", direccion: "Av. Lima 123", fechaDeRegistro: "2025-04-03", numeroCuenta: "001-2025-000123", montoMinimoApertura: 500.0, nombreCompleto: "Juan Pérez", dni: "12345678")
+
+let clienteJuridico = ClienteJuridico(codigo: "C002", direccion: "Jr. Empresas 456", fechaDeRegistro: "2025-04-01", numeroCuenta: "001-2025-000456", montoMinimoApertura: 3000.0, razonSocial: "Soluciones SAC", ruc: "20123456789", representanteLegal: "María León")
+
+let clientes: [Cliente] = [clienteNatural, clienteJuridico]
+
+for cliente in clientes {
+    cliente.mostrarDatos()
+    print("--------------------")
+}
