@@ -61,3 +61,25 @@ class Alumno {
         print("Total final a pagar: S/ \(String(format: "%.2f", calcularTotalFinal()))")
     }
 }
+
+// --- Simulación ---
+let cursoSwift = Curso(nombre: "Swift Básico", precio: 300.0)
+let cursoKotlin = Curso(nombre: "Kotlin Intermedio", precio: 350.0)
+let cursoUX = Curso(nombre: "UX Design", precio: 280.0)
+let cursoExcel = Curso(nombre: "Excel Avanzado", precio: 200.0)
+
+let alumno1 = Alumno(nombre: "Carlos Ramírez", esAlumnoTecsup: true)
+alumno1.matricular(curso: cursoSwift)
+alumno1.matricular(curso: cursoKotlin)
+alumno1.matricular(curso: cursoUX)
+
+let alumno2 = Alumno(nombre: "Lucía Torres", esAlumnoTecsup: false)
+alumno2.matricular(curso: cursoExcel)
+alumno2.matricular(curso: cursoUX)
+
+let alumnos: [Alumno] = [alumno1, alumno2]
+
+for alumno in alumnos {
+    alumno.mostrarResumen()
+    print("--------------------")
+}
