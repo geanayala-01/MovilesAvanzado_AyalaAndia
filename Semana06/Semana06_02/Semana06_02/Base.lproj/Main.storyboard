@@ -91,12 +91,20 @@
                                 <rect key="frame" x="136" y="420" width="121" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Continuar"/>
+                                <connections>
+                                    <action selector="btnContinuar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DC1-ac-con"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="DC1-nv-itm"/>
+                    <connections>
+                        <outlet property="tfApellido" destination="DC1-tf-ape" id="DC1-ot-ape"/>
+                        <outlet property="tfNombre" destination="DC1-tf-nom" id="DC1-ot-nom"/>
+                        <outlet property="tfDni" destination="DC1-tf-dni" id="DC1-ot-dni"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -105,7 +113,7 @@
         <!--DATOS INGRESADOS-->
         <scene sceneID="CNF-sc-ene">
             <objects>
-                <viewController id="CNF-vc-ctr" customClass="ViewControllerConfirmacion" customModule="Semana06_02" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewControllerConfirmacion" id="CNF-vc-ctr" customClass="ViewControllerConfirmacion" customModule="Semana06_02" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CNF-vw-mai">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -166,10 +174,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNF-bt-vol">
+                                <rect key="frame" x="136" y="420" width="121" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Volver"/>
+                                <connections>
+                                    <action selector="btnVolver:" destination="CNF-vc-ctr" eventType="touchUpInside" id="CNF-ac-vol"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="CNF-sf-are"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="tfApellido" destination="CNF-vl-ape" id="CNF-ot-ape"/>
+                        <outlet property="tfNombre" destination="CNF-vl-nom" id="CNF-ot-nom"/>
+                        <outlet property="tfDni" destination="CNF-vl-dni" id="CNF-ot-dni"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CNF-fr-rsp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
