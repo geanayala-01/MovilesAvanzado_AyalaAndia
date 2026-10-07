@@ -38,7 +38,13 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="P01-lb-dev" secondAttribute="bottom" constant="30" id="P01-bt-dev"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="P01-nv-itm"/>
+                    <navigationItem key="navigationItem" id="P01-nv-itm">
+                        <barButtonItem key="rightBarButtonItem" title="A Pantalla 2" id="P01-bb-pt2">
+                            <connections>
+                                <segue destination="P02-vc-ctr" kind="show" id="P01-sg-sho"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -84,6 +90,7 @@
                             <constraint firstItem="P02-lb-tit" firstAttribute="centerY" secondItem="P02-vw-mai" secondAttribute="centerY" id="P02-cy-tit"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="P02-nv-itm"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P02-fr-rsp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
