@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         TablaContacto.delegate = self
         mostrarRutaBaseDeDatos()
         cargarInfoCoreData()   // Carga los datos almacenados en Core Data
+        // probarRelacion()   // Ejecutar UNA sola vez: crea el grupo de prueba
     }
 
     // MARK: - Conexión con Core Data
