@@ -168,7 +168,15 @@ class NuevaVentaViewController: UITableViewController {
             alerta("Error", e.localizedDescription)
             return
         }
-        alerta("Venta registrada", "Total \(k.total.soles). Stock de \(producto.nombre ?? ""): \(producto.stock).")
+        let ok = UIAlertController(title: "Venta registrada",
+                                   message: "Total \(k.total.soles). Stock de \(producto.nombre ?? ""): \(producto.stock).",
+                                   preferredStyle: .alert)
+        ok.addAction(UIAlertAction(title: "Ver comprobante", style: .default) { [weak self] _ in
+            let nav = UINavigationController(rootViewController: ComprobanteViewController(venta: v))
+            self?.present(nav, animated: true)
+        })
+        ok.addAction(UIAlertAction(title: "OK", style: .cancel))
+        present(ok, animated: true)
         self.cliente = nil
         self.producto = nil
         cantidad = 1

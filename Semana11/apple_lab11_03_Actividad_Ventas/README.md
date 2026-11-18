@@ -36,6 +36,13 @@ La regla **Deny** hace que Core Data rechace el `save()` si intentas borrar un p
 | A9 Resumen | `ResumenViewController.swift` | Saludo, vendido hoy comparado con ayer, IGV del mes, barras de 7 días, ranking de vendedores y stock bajo (todo con fetch requests). |
 | Cuenta | `CuentaViewController.swift` | Nombre, usuario, rol y Cerrar sesión. |
 
+## Valor agregado: comprobante de venta (`ComprobanteViewController.swift`)
+
+- Al tocar cualquier venta en Mis ventas o en Ventas del equipo se abre su comprobante. También aparece con el botón "Ver comprobante" justo después de registrar una venta.
+- El comprobante muestra número, fecha, vendedor, cliente, documento, categoría, producto, subtotal, descuento, IGV y total. Todo se lee de las relaciones `venta.cliente`, `venta.producto` y `venta.vendedor`.
+- Si la venta está anulada, muestra el sello **ANULADA** con el motivo.
+- El botón **Compartir** genera un PDF con `UIGraphicsPDFRenderer` y abre la hoja de compartir del sistema (WhatsApp, correo, Archivos o imprimir).
+
 ## Reglas de negocio (`Datos.swift` → `Reglas`)
 
 - **Categoría del cliente** (se calcula, no se guarda): suma de ventas **no anuladas**. Menos de S/ 1,000 es Regular, desde S/ 1,000 es Frecuente y desde S/ 5,000 es VIP.

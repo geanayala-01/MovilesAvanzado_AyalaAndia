@@ -59,6 +59,12 @@ class VentasBaseViewController: UITableViewController, UISearchResultsUpdating {
 
     func mostrarVendedor() -> Bool { false }
 
+    // Valor agregado: al tocar una venta se abre su comprobante
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        navigationController?.pushViewController(ComprobanteViewController(venta: ventas[indexPath.row]), animated: true)
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let c = tableView.dequeueReusableCell(withIdentifier: FilaCell.id, for: indexPath) as! FilaCell
         let v = ventas[indexPath.row]
