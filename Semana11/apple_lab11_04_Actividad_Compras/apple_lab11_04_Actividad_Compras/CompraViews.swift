@@ -87,6 +87,7 @@ struct NuevaCompraView: View {
             .disabled(!valido)
             .padding(.horizontal).padding(.bottom, 8)
         }
+        .fondoElegante()
         .navigationTitle("Nueva compra")
         .conAvatar()                                                             // ① Avatar de la sesión
         .sheet(item: $registrada) { c in
@@ -126,7 +127,7 @@ struct MisComprasView: View {
 
             ListaMisCompras(usuario: sesion.usuario?.usuario ?? "", filtro: filtro, busqueda: busqueda)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(FondoElegante())
         .navigationTitle("Mis compras")
         .searchable(text: $busqueda, prompt: "Buscar por proveedor")
         .conAvatar()
@@ -166,6 +167,7 @@ struct ListaMisCompras: View {
                 Text("El comprador solo ve sus compras; no puede pagar ni aprobar.")    // ④
             }
         }
+        .scrollContentBackground(.hidden)
         .overlay { if filtradas.isEmpty { ContentUnavailableView("Sin compras", systemImage: "tray") } }
     }
 }
@@ -188,7 +190,7 @@ struct FilaCompra: View {
             Image(systemName: icono)
                 .font(.headline).foregroundStyle(.white)
                 .frame(width: 40, height: 40)
-                .background(colorEstado(compra), in: RoundedRectangle(cornerRadius: 10))
+                .background(colorEstado(compra).gradient, in: Circle())
             VStack(alignment: .leading, spacing: 2) {
                 Text(compra.proveedor?.nombre ?? "—").font(.headline).lineLimit(1)
                 Text("\(compra.producto?.nombre ?? "") × \(compra.cantidad) · \(compra.fecha.corta)")

@@ -29,6 +29,7 @@ struct AprobarView: View {
             }
         }
         .overlay { if pendientes.isEmpty { ContentUnavailableView("Nada por aprobar", systemImage: "checkmark.seal") } }
+        .fondoElegante()
         .navigationTitle("Aprobar")
         .conAvatar()
         // ④ Rechazar pide motivo (botón deshabilitado si está vacío)
@@ -127,7 +128,7 @@ struct PorPagarView: View {
             .padding(.horizontal).padding(.bottom, 6)
             ListaPorPagar(filtro: filtro, busqueda: busqueda)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(FondoElegante())
         .navigationTitle("Por pagar")
         .searchable(text: $busqueda, prompt: "Buscar por proveedor")
         .conAvatar()
@@ -183,10 +184,11 @@ struct ListaPorPagar: View {
             }
             if filtro != 2 {
                 Section("Total por pagar") {                                      // ⑤ Total por pagar
-                    Text(filtradas.reduce(0) { $0 + $1.total }.soles).font(.title2.bold())
+                    Text(filtradas.reduce(0) { $0 + $1.total }.soles).font(.system(.title, design: .serif).bold()).foregroundStyle(verde)
                 }
             }
         }
+        .scrollContentBackground(.hidden)
         .overlay { if filtradas.isEmpty { ContentUnavailableView("Sin compras", systemImage: "tray") } }
     }
 }
@@ -234,12 +236,11 @@ struct ResumenView: View {
                         }
                     }
                 }
-                .padding()
-                .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14))
+                .tarjeta()
             }
             .padding()
         }
-        .background(Color(.systemGroupedBackground))
+        .background(FondoElegante())
         .navigationTitle("Resumen")
         .conAvatar()                                                                 // ①
     }
@@ -254,11 +255,10 @@ struct Indicador: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(titulo).font(.caption).foregroundStyle(.secondary)
-            Text(valor).font(.title3.bold()).foregroundStyle(color).minimumScaleFactor(0.6).lineLimit(1)
+            Text(valor).font(.system(.title3, design: .serif).bold()).foregroundStyle(color).minimumScaleFactor(0.6).lineLimit(1)
             if let detalle { Text(detalle).font(.caption).foregroundStyle(color) }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
-        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14))
+        .tarjeta()
     }
 }

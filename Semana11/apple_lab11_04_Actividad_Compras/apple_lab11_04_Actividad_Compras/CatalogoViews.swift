@@ -42,9 +42,10 @@ struct ProductosView: View {
             }
 
             Section("Valor del inventario (stock × costo promedio)") {
-                Text(valorInventario.soles).font(.title2.bold())
+                Text(valorInventario.soles).font(.system(.title, design: .serif).bold()).foregroundStyle(verde)
             }
         }
+        .fondoElegante()
         .navigationTitle("Productos")
         .searchable(text: $busqueda, prompt: "Buscar")                  // ② Búsqueda
         .toolbar {
@@ -148,6 +149,7 @@ struct ProveedoresView: View {
                 Text("\"Por pagar\" y \"comprado\" se calculan con las compras del proveedor (relación proveedor ▸ compras).")
             }
         }
+        .fondoElegante()
         .navigationTitle("Proveedores")
         .searchable(text: $busqueda, prompt: "Buscar por nombre o RUC")
         .toolbar {

@@ -16,43 +16,67 @@ struct LoginView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                // ① Logo y nombre
+                // ① Logo y nombre (logo con anillo dorado)
                 Image(systemName: "shippingbox.fill")
-                    .font(.system(size: 42))
+                    .font(.system(size: 40, weight: .semibold))
+                    .foregroundStyle(LinearGradient(colors: [dorado, Color(red: 1, green: 0.88, blue: 0.55)],
+                                                    startPoint: .top, endPoint: .bottom))
+                    .frame(width: 96, height: 96)
+                    .background(.white.opacity(0.08), in: Circle())
+                    .overlay(Circle().stroke(dorado.opacity(0.8), lineWidth: 1.5))
+                    .shadow(color: dorado.opacity(0.4), radius: 18)
+                Text("Compras")
+                    .font(.system(size: 40, weight: .bold, design: .serif))
                     .foregroundStyle(.white)
-                    .frame(width: 90, height: 90)
-                    .background(LinearGradient(colors: [verde, .teal], startPoint: .top, endPoint: .bottom),
-                                in: RoundedRectangle(cornerRadius: 22))
-                Text("Compras Tecsup").font(.largeTitle.bold())
-                Text("Inicia sesión para continuar").foregroundStyle(.secondary)
-                    .padding(.bottom, 16)
+                Text("TECSUP · DISTRIBUIDORA")
+                    .font(.caption.weight(.semibold)).tracking(4)
+                    .foregroundStyle(dorado)
+                    .padding(.bottom, 24)
 
-                // ② Usuario · ③ Clave oculta
-                CampoTexto(titulo: "Usuario", texto: $usuario)
-                CampoTexto(titulo: "Clave", texto: $clave, seguro: true)
+                // ② Usuario · ③ Clave oculta (campos de vidrio)
+                CampoTexto(titulo: "Usuario", texto: $usuario, icono: "person", oscuro: true)
+                CampoTexto(titulo: "Clave", texto: $clave, seguro: true, icono: "lock", oscuro: true)
 
                 // ④ Mensaje de error genérico
                 if error {
                     Label("Usuario o clave incorrectos", systemImage: "exclamationmark.triangle.fill")
-                        .foregroundStyle(.red).font(.subheadline)
+                        .foregroundStyle(Color(red: 1, green: 0.55, blue: 0.5)).font(.subheadline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
-                // ⑤ Ingresar
+                // ⑤ Ingresar (botón dorado)
                 Button { ingresar() } label: {
-                    Text("Ingresar").frame(maxWidth: .infinity)
+                    Text("Ingresar")
+                        .font(.headline)
+                        .foregroundStyle(esmeraldaOscuro)
+                        .frame(maxWidth: .infinity).padding(.vertical, 16)
+                        .background(LinearGradient(colors: [Color(red: 0.93, green: 0.80, blue: 0.42), dorado],
+                                                   startPoint: .top, endPoint: .bottom),
+                                    in: Capsule())
+                        .shadow(color: dorado.opacity(0.45), radius: 12, y: 4)
                 }
-                .buttonStyle(.borderedProminent).controlSize(.large)
+                .padding(.top, 6)
 
                 // ⑥ Ir a Crear cuenta
-                NavigationLink("¿Primera vez? Crear cuenta") { RegistroView() }
+                NavigationLink { RegistroView() } label: {
+                    Text("¿Primera vez? ").foregroundStyle(.white.opacity(0.7)) + Text("Crear cuenta").bold().foregroundStyle(dorado)
+                }
+                .padding(.top, 4)
 
                 Text("Demo: mtorres2 / rvega (Comprador) · supervisor (Supervisor) · clave 123456")
-                    .font(.caption).foregroundStyle(.tertiary).multilineTextAlignment(.center)
+                    .font(.caption2).foregroundStyle(.white.opacity(0.45)).multilineTextAlignment(.center)
+                    .padding(.top, 20)
             }
-            .padding(24).padding(.top, 30)
+            .padding(28).padding(.top, 50)
         }
-        .background(Color(.systemGroupedBackground))
+        .background {
+            ZStack {
+                LinearGradient(colors: [Color(red: 0.03, green: 0.27, blue: 0.21), esmeraldaOscuro, .black],
+                               startPoint: .top, endPoint: .bottom)
+                RadialGradient(colors: [dorado.opacity(0.25), .clear], center: .top, startRadius: 0, endRadius: 420)
+            }
+            .ignoresSafeArea()
+        }
     }
 
     func ingresar() {
@@ -90,8 +114,8 @@ struct RegistroView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 14) {
-                CampoTexto(titulo: "Nombre completo", texto: $nombre)          // ②
-                CampoTexto(titulo: "Usuario", texto: $usuario)                 // ③
+                CampoTexto(titulo: "Nombre completo", texto: $nombre, icono: "person.text.rectangle")          // ②
+                CampoTexto(titulo: "Usuario", texto: $usuario, icono: "at")                 // ③
                 if !usuarioNormalizado.isEmpty {
                     let ya = existe(usuarioNormalizado)
                     Label(ya ? "Ese usuario ya existe" : "Disponible",
@@ -99,8 +123,8 @@ struct RegistroView: View {
                         .font(.footnote).foregroundStyle(ya ? .red : .green)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                CampoTexto(titulo: "Clave (mínimo 6 caracteres)", texto: $clave, seguro: true)   // ④
-                CampoTexto(titulo: "Confirmar clave", texto: $confirmar, seguro: true)
+                CampoTexto(titulo: "Clave (mínimo 6 caracteres)", texto: $clave, seguro: true, icono: "lock")   // ④
+                CampoTexto(titulo: "Confirmar clave", texto: $confirmar, seguro: true, icono: "lock.rotation")
 
                 // ⑤ Rol
                 Text("TU ROL").font(.caption).foregroundStyle(.secondary)
@@ -125,7 +149,7 @@ struct RegistroView: View {
             }
             .padding(24)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(FondoElegante())
         .navigationTitle("Crear cuenta")              // ① Título (y "< Atrás" al login)
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -149,15 +173,27 @@ struct CampoTexto: View {
     let titulo: String
     @Binding var texto: String
     var seguro = false
+    var icono = "textformat"
+    var oscuro = false
 
     var body: some View {
-        Group {
-            if seguro { SecureField(titulo, text: $texto).textContentType(.oneTimeCode) }
-            else { TextField(titulo, text: $texto) }
+        HStack(spacing: 12) {
+            Image(systemName: icono).foregroundStyle(oscuro ? dorado : verde).frame(width: 20)
+            Group {
+                if seguro {
+                    SecureField("", text: $texto, prompt: Text(titulo).foregroundStyle(oscuro ? .white.opacity(0.5) : .secondary))
+                        .textContentType(.oneTimeCode)
+                } else {
+                    TextField("", text: $texto, prompt: Text(titulo).foregroundStyle(oscuro ? .white.opacity(0.5) : .secondary))
+                }
+            }
+            .foregroundStyle(oscuro ? .white : .primary)
         }
         .textInputAutocapitalization(titulo.hasPrefix("Nombre") ? .words : .never)
         .autocorrectionDisabled()
-        .padding(14)
-        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12))
+        .padding(16)
+        .background(oscuro ? AnyShapeStyle(.white.opacity(0.08)) : AnyShapeStyle(.background),
+                    in: RoundedRectangle(cornerRadius: 16))
+        .overlay(RoundedRectangle(cornerRadius: 16).stroke(dorado.opacity(oscuro ? 0.45 : 0.3), lineWidth: 1))
     }
 }

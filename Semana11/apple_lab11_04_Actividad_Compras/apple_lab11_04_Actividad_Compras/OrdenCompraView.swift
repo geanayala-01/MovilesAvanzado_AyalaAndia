@@ -34,7 +34,7 @@ struct OrdenCompraView: View {
             }
             .padding()
         }
-        .background(Color(.systemGroupedBackground))
+        .background(FondoElegante())
         .navigationTitle("Orden de compra")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -78,7 +78,7 @@ struct TicketOrden: View {
         VStack(alignment: .leading, spacing: 6) {
             VStack(spacing: 4) {
                 Image(systemName: "shippingbox.fill").font(.title).foregroundStyle(verde)
-                Text("Compras Tecsup").font(.title3.bold())
+                Text("Compras Tecsup").font(.system(.title3, design: .serif).bold())
                 Text("Orden de compra \(Self.numero(compra))").font(.subheadline).foregroundStyle(.gray)
             }
             .frame(maxWidth: .infinity)

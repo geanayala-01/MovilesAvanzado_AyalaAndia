@@ -75,7 +75,43 @@ final class Sesion {
 
 // MARK: - Formato y colores
 
-let verde = Color(red: 0.05, green: 0.55, blue: 0.45)
+// Tema "Esmeralda y oro"
+let verde = Color(red: 0.04, green: 0.36, blue: 0.27)        // esmeralda profundo
+let esmeraldaOscuro = Color(red: 0.02, green: 0.16, blue: 0.13)
+let dorado = Color(red: 0.80, green: 0.64, blue: 0.24)
+let crema = Color(red: 0.97, green: 0.95, blue: 0.90)
+let menta = Color(red: 0.89, green: 0.94, blue: 0.91)
+
+// Fondo degradado crema → menta con un brillo dorado arriba
+struct FondoElegante: View {
+    @Environment(\.colorScheme) private var esquema
+    var body: some View {
+        ZStack {
+            if esquema == .dark {
+                LinearGradient(colors: [esmeraldaOscuro, .black], startPoint: .top, endPoint: .bottom)
+            } else {
+                LinearGradient(colors: [crema, menta], startPoint: .topLeading, endPoint: .bottomTrailing)
+            }
+            RadialGradient(colors: [dorado.opacity(0.18), .clear], center: .topTrailing, startRadius: 10, endRadius: 380)
+        }
+        .ignoresSafeArea()
+    }
+}
+
+extension View {
+    // Aplica el fondo elegante a listas, formularios y scrolls
+    func fondoElegante() -> some View {
+        scrollContentBackground(.hidden).background(FondoElegante())
+    }
+
+    // Tarjeta blanca con borde dorado fino y sombra suave
+    func tarjeta() -> some View {
+        padding()
+            .background(.background, in: RoundedRectangle(cornerRadius: 18))
+            .overlay(RoundedRectangle(cornerRadius: 18).stroke(dorado.opacity(0.35), lineWidth: 0.8))
+            .shadow(color: verde.opacity(0.10), radius: 10, y: 4)
+    }
+}
 
 extension Double {
     var soles: String {

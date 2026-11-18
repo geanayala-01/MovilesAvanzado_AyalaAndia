@@ -4,11 +4,31 @@
 //
 
 import SwiftUI
+import UIKit
 import SwiftData
 
 @main
 struct ComprasApp: App {
     @State private var sesion = Sesion()
+
+    // Títulos de navegación con letra serif (estilo editorial) en color esmeralda
+    init() {
+        let verdeUI = UIColor(red: 0.04, green: 0.36, blue: 0.27, alpha: 1)
+        func serif(_ tam: CGFloat, _ peso: UIFont.Weight) -> UIFont {
+            let base = UIFont.systemFont(ofSize: tam, weight: peso)
+            return UIFont(descriptor: base.fontDescriptor.withDesign(.serif) ?? base.fontDescriptor, size: tam)
+        }
+        let transparente = UINavigationBarAppearance()
+        transparente.configureWithTransparentBackground()
+        transparente.largeTitleTextAttributes = [.font: serif(34, .bold), .foregroundColor: verdeUI]
+        transparente.titleTextAttributes = [.font: serif(17, .semibold), .foregroundColor: verdeUI]
+        let normal = UINavigationBarAppearance()
+        normal.configureWithDefaultBackground()
+        normal.largeTitleTextAttributes = transparente.largeTitleTextAttributes
+        normal.titleTextAttributes = transparente.titleTextAttributes
+        UINavigationBar.appearance().standardAppearance = normal
+        UINavigationBar.appearance().scrollEdgeAppearance = transparente
+    }
 
     // Contenedor persistente con las 4 clases @Model
     let container: ModelContainer = {
@@ -26,6 +46,7 @@ struct ComprasApp: App {
             RaizView()
                 .environment(sesion)
                 .tint(verde)
+                .fontDesign(.rounded)
         }
         .modelContainer(container)
     }
@@ -93,7 +114,8 @@ struct AvatarMenu: View {
                 .font(.caption.bold())
                 .foregroundStyle(.white)
                 .frame(width: 32, height: 32)
-                .background(verde, in: Circle())
+                .background(LinearGradient(colors: [verde, esmeraldaOscuro], startPoint: .top, endPoint: .bottom), in: Circle())
+                .overlay(Circle().stroke(dorado, lineWidth: 1.5))
         }
     }
 }
@@ -127,7 +149,9 @@ struct Iniciales: View {
             .font(.subheadline.bold())
             .foregroundStyle(.white)
             .frame(width: 40, height: 40)
-            .background(color, in: RoundedRectangle(cornerRadius: 10))
+            .background(LinearGradient(colors: [color, color.opacity(0.65)], startPoint: .topLeading, endPoint: .bottomTrailing),
+                        in: RoundedRectangle(cornerRadius: 12))
+            .overlay(RoundedRectangle(cornerRadius: 12).stroke(dorado.opacity(0.5), lineWidth: 1))
     }
 }
 
