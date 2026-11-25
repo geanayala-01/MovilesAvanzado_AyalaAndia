@@ -1,0 +1,8 @@
+import Foundation
+
+// Codable: permite convertir entre esta estructura y datos JSON automáticamente.
+// Identifiable: permite que SwiftUI sepa cómo identificar cada elemento en una lista.
+nonisolated struct User: Codable, Identifiable {
+    let id: Int
+    let name: String
+}
